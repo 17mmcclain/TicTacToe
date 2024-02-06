@@ -11,8 +11,6 @@
 
             game.OutPutArray(game.board);
 
-            //game.WhoIsFirst();
-
             game.PlayFunction();
 
         }

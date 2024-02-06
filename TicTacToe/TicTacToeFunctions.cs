@@ -44,10 +44,15 @@ namespace TicTacToe
                 int number = 1;
                 return number;
             }
-            else
+            else if (selection == 2)
             {
                 int number = 2;
                 return number;
+            }
+            else
+            {
+                Console.WriteLine("Invalid player number. ");
+                return 0;
             }
         }
 
@@ -57,10 +62,11 @@ namespace TicTacToe
                 "First you will decide if player 1 or player 2 will go first.\n" +
                 "Once decided, the chosen player will pick a spot to put there player number in. Empty spots only.\n" +
                 "Once a player has 3 spots in a row, they have won. Otherwise, it's a tie.\n" +
-                "To pick a spot, each spot can be represented by counting from 1-9, left to right, and top to bottom.\n" +
+                "To pick a spot, each spot can be represented by counting from 1-9, left to right, and bottom to top, like most number pads!.\n" +
                 "7 - 8 - 9\n" +
                 "4 - 5 - 6\n" +
-                "1 - 2 - 3");
+                "1 - 2 - 3\n" +
+                "However, if you decide to choose a spot that's already taken, that means you forfeit your turn!\n\n");
         }
 
         public void PlayFunction()
@@ -69,12 +75,26 @@ namespace TicTacToe
             if (selection == 1)
             {
                 Player1functions();
-                
+
             }
             if (selection == 2)
             {
                 Player2Functions();
-                
+
+            }
+            while (selection != 1 || selection != 2)
+            {
+                selection = WhoIsFirst();
+                if (selection == 1)
+                {
+                    Player1functions();
+
+                }
+                if (selection == 2)
+                {
+                    Player2Functions();
+
+                }
             }
         }
 
@@ -133,235 +153,411 @@ namespace TicTacToe
         public void Player1functions()
         {
             int flag = CheckWhoWon();
-            if (flag == 0)
+            for (int i = 1; i <= 10; i++)
             {
-                for (int i = 1; i <= 10; i++)
+                OutPutArray(board);
+                flag = CheckWhoWon();
+
+                if (flag == 0)
                 {
                     if (i == 1 || i == 3 || i == 5 || i == 7 || i == 9)
                     {
-                        OutPutArray(board);
 
-                        CheckWhoWon();
-
-                        Console.Write("Select your position: ");
+                        Console.Write("Player 1: Select your position: ");
                         int position = int.Parse(Console.ReadLine());
 
-                        switch (position)
-                        {
-                            case 7:
-                                board[0, 0] = 1;
+                            switch (position)
+                            {
+                                case 7:
+                                if (board[0, 0] == 0)
+                                {
+                                    board[0, 0] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 8:
-                                board[0, 1] = 1;
+                                case 8:
+                                if (board[0,1] == 0)
+                                {
+                                    board[0, 1] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 9:
-                                board[0, 2] = 1;
+                                case 9:
+                                if (board[0, 2] == 0)
+                                {
+                                    board[0, 2] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 4:
-                                board[1, 0] = 1;
+                                case 4:
+                                if (board[1, 0] == 0)
+                                {
+                                    board[1, 0] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 5:
-                                board[1, 1] = 1;
+                                case 5:
+                                if (board[1, 1] == 0)
+                                {
+                                    board[1, 1] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 6:
-                                board[1, 2] = 1;
+                                case 6:
+                                if (board[1, 2] == 0)
+                                {
+                                    board[1, 2] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 1:
-                                board[2, 0] = 1;
+                                case 1:
+                                if (board[2, 0] == 0)
+                                {
+                                    board[2, 0] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 2:
-                                board[2, 1] = 1;
+                                case 2:
+                                if (board[2, 1] == 0)
+                                {
+                                    board[2, 1] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            case 3:
-                                board[2, 2] = 1;
+                                case 3:
+                                if (board[2, 2] == 0)
+                                {
+                                    board[2, 2] = 1;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
                                 break;
 
-                            default:
-                                Console.WriteLine("Invalid spot entered");
+                                default:
+                                    Console.WriteLine("Invalid spot entered.");
                                 break;
+                            }
                         }
                     }
                     if (i == 2 || i == 4 || i == 6 || i == 8)
                     {
-                        OutPutArray(board);
 
-                        CheckWhoWon();
-
-                        Console.Write("Select your position: ");
+                        Console.Write("Player 2, Select your position: ");
                         int position = int.Parse(Console.ReadLine());
 
-                        switch (position)
-                        {
-                            case 7:
+                            switch (position)
+                            {
+                        case 7:
+                            if (board[0, 0] == 0)
+                            {
                                 board[0, 0] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 8:
+                        case 8:
+                            if (board[0, 1] == 0)
+                            {
                                 board[0, 1] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 9:
+                        case 9:
+                            if (board[0, 2] == 0)
+                            {
                                 board[0, 2] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 4:
+                        case 4:
+                            if (board[1, 0] == 0)
+                            {
                                 board[1, 0] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 5:
+                        case 5:
+                            if (board[1, 1] == 0)
+                            {
                                 board[1, 1] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 6:
+                        case 6:
+                            if (board[1, 2] == 0)
+                            {
                                 board[1, 2] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 1:
+                        case 1:
+                            if (board[2, 0] == 0)
+                            {
                                 board[2, 0] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 2:
+                        case 2:
+                            if (board[2, 1] == 0)
+                            {
                                 board[2, 1] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            case 3:
+                        case 3:
+                            if (board[2, 2] == 0)
+                            {
                                 board[2, 2] = 2;
-                                break;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
 
-                            default:
-                                Console.WriteLine("Invalid spot entered");
-                                break;
-
-                        }
+                        default:
+                            Console.WriteLine("Invalid spot entered.");
+                            break;
 
                     }
-                }
-            }
-            else if (flag == 1)
-            {
-                Console.WriteLine("Player 1 has won!");
-            }
-            else
-            {
-                Console.WriteLine("Player 2 has won!")
+                    }
+                Console.WriteLine("Looks like nobody won.");
             }
         }
 
         public void Player2Functions()
         {
+            int flag = CheckWhoWon();
             for (int i = 1; i <= 10; i++)
             {
-                if (i == 1 || i == 3 || i == 5 || i == 7 || i == 9)
+                OutPutArray(board);
+                flag = CheckWhoWon();
+
+                if (flag == 0)
                 {
-                    OutPutArray(board);
-
-                    Console.Write("Select your position: ");
-                    int position = int.Parse(Console.ReadLine());
-
-                    switch (position)
+                    if (i == 1 || i == 3 || i == 5 || i == 7 || i == 9)
                     {
-                        case 1:
-                            board[0, 0] = 2;
-                            break;
 
-                        case 2:
-                            board[0, 1] = 2;
-                            break;
+                        Console.Write("Player 1: Select your position: ");
+                        int position = int.Parse(Console.ReadLine());
 
-                        case 3:
-                            board[0, 2] = 2;
-                            break;
+                        switch (position)
+                        {
+                            case 7:
+                                if (board[0, 0] == 0)
+                                {
+                                    board[0, 0] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        case 4:
-                            board[1, 0] = 2;
-                            break;
+                            case 8:
+                                if (board[0, 1] == 0)
+                                {
+                                    board[0, 1] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        case 5:
-                            board[1, 1] = 2;
-                            break;
+                            case 9:
+                                if (board[0, 2] == 0)
+                                {
+                                    board[0, 2] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        case 6:
-                            board[1, 2] = 2;
-                            break;
+                            case 4:
+                                if (board[1, 0] == 0)
+                                {
+                                    board[1, 0] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        case 7:
-                            board[2, 0] = 2;
-                            break;
+                            case 5:
+                                if (board[1, 1] == 0)
+                                {
+                                    board[1, 1] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        case 8:
-                            board[2, 1] = 2;
-                            break;
+                            case 6:
+                                if (board[1, 2] == 0)
+                                {
+                                    board[1, 2] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        case 9:
-                            board[2, 2] = 2;
-                            break;
+                            case 1:
+                                if (board[2, 0] == 0)
+                                {
+                                    board[2, 0] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
 
-                        default:
-                            Console.WriteLine("Invalid spot entered");
-                            break;
+                            case 2:
+                                if (board[2, 1] == 0)
+                                {
+                                    board[2, 1] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
+
+                            case 3:
+                                if (board[2, 2] == 0)
+                                {
+                                    board[2, 2] = 2;
+                                }
+                                else
+                                { Console.WriteLine("That spot is taken! You lose your turn."); }
+                                break;
+
+                            default:
+                                Console.WriteLine("Invalid spot entered.");
+                                break;
+                        }
                     }
                 }
                 if (i == 2 || i == 4 || i == 6 || i == 8)
                 {
-                    OutPutArray(board);
 
-                    Console.Write("Select your position: ");
+                    Console.Write("Player 2, Select your position: ");
                     int position = int.Parse(Console.ReadLine());
 
                     switch (position)
                     {
-                        case 1:
-                            board[0, 0] = 1;
-                            break;
-
-                        case 2:
-                            board[0, 1] = 1;
-                            break;
-
-                        case 3:
-                            board[0, 2] = 1;
-                            break;
-
-                        case 4:
-                            board[1, 0] = 1;
-                            break;
-
-                        case 5:
-                            board[1, 1] = 1;
-                            break;
-
-                        case 6:
-                            board[1, 2] = 1;
-                            break;
-
                         case 7:
-                            board[2, 0] = 1;
+                            if (board[0, 0] == 0)
+                            {
+                                board[0, 0] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
                             break;
 
                         case 8:
-                            board[2, 1] = 1;
+                            if (board[0, 1] == 0)
+                            {
+                                board[0, 1] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
                             break;
 
                         case 9:
-                            board[2, 2] = 1;
+                            if (board[0, 2] == 0)
+                            {
+                                board[0, 2] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
+
+                        case 4:
+                            if (board[1, 0] == 0)
+                            {
+                                board[1, 0] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
+
+                        case 5:
+                            if (board[1, 1] == 0)
+                            {
+                                board[1, 1] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
+
+                        case 6:
+                            if (board[1, 2] == 0)
+                            {
+                                board[1, 2] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
+
+                        case 1:
+                            if (board[2, 0] == 0)
+                            {
+                                board[2, 0] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
+
+                        case 2:
+                            if (board[2, 1] == 0)
+                            {
+                                board[2, 1] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
+                            break;
+
+                        case 3:
+                            if (board[2, 2] == 0)
+                            {
+                                board[2, 2] = 1;
+                            }
+                            else
+                            { Console.WriteLine("That spot is taken! You lose your turn."); }
                             break;
 
                         default:
-                            Console.WriteLine("Invalid spot entered");
+                            Console.WriteLine("Invalid spot entered.");
                             break;
 
                     }
                 }
             }
+            Console.WriteLine("Looks like nobody won.");
         }
-    
     }
+    
 }
+
